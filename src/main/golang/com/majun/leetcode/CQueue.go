@@ -3,13 +3,13 @@ package leetcode
 import "container/list"
 
 type CQueue struct {
-	stack, reveredStack *list.List
+	stack, reverseStack *list.List
 }
 
 func Constructor() CQueue {
 	return CQueue{
 		stack:        list.New(),
-		reveredStack: list.New(),
+		reverseStack: list.New(),
 	}
 }
 
@@ -18,14 +18,14 @@ func (this *CQueue) AppendTail(value int) {
 }
 
 func (this *CQueue) DeleteHead() int {
-	if this.reveredStack.Len() == 0 {
+	if this.reverseStack.Len() == 0 {
 		for this.stack.Len() > 0 {
-			this.reveredStack.PushBack(this.stack.Remove(this.stack.Back()))
+			this.reverseStack.PushBack(this.stack.Remove(this.stack.Back()))
 		}
 	}
-	if this.reveredStack.Len() != 0 {
-		head := this.reveredStack.Back()
-		this.reveredStack.Remove(head)
+	if this.reverseStack.Len() != 0 {
+		head := this.reverseStack.Back()
+		this.reverseStack.Remove(head)
 		return head.Value.(int)
 	}
 	return -1
